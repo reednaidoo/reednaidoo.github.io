@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reed Naidoo</title>
+<meta name="description" content="Reed Naidoo. PhD researcher at The Institute of Cancer Research and Research Scientist at Sentinal4D, building generative models of 3D cell morphology." />
+<meta property="og:title" content="Reed Naidoo" />
+<meta property="og:description" content="Generative models for 3D cell morphology and perturbation." />
+<meta property="og:image" content="https://reednaidoo.github.io/assets/og.jpg" />
+<meta name="theme-color" content="#ffffff" />
+<link rel="icon" href="assets/cell.svg" type="image/svg+xml" />
+<link rel="preload" href="assets/fonts/funnel-display-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+<style>
+@font-face{font-family:"Funnel Display";font-weight:400;font-display:swap;src:url(assets/fonts/funnel-display-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Funnel Display";font-weight:600;font-display:swap;src:url(assets/fonts/funnel-display-latin-600-normal.woff2) format("woff2")}
+:root{
+  --ink:#08090D; --body:#3B3A45; --muted:#86838F; --line:#ECEAF1;
+  --purple:#47308C; --pink:#F2A7DE; --lime:#A4C027; --tint:#F5F5F7;
+  --display:"Funnel Display","SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--body);
+  font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--purple);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+img{display:block;max-width:100%}
+.w{max-width:980px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;
+  background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.06)}
+nav .w{height:100%;display:flex;align-items:center;justify-content:space-between}
+nav .brand{font:600 17px var(--display);color:var(--ink);letter-spacing:-.01em}
+nav .brand:hover{text-decoration:none}
+nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0;font-size:13px}
+nav ul a{color:var(--body);opacity:.85}
+nav ul a:hover{opacity:1;text-decoration:none;color:var(--ink)}
+
+/* hero */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 40px}
+.eyebrow{font:600 13px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--purple);margin:0 0 22px}
+.hero h1{font:600 clamp(52px,10vw,128px)/.98 var(--display);letter-spacing:-.035em;color:var(--ink);margin:0}
+.hero h1 .grad{background:linear-gradient(100deg,var(--purple) 10%,#B35FC0 55%,var(--pink) 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lede{font-size:clamp(19px,2.2vw,24px);line-height:1.45;max-width:640px;margin:28px auto 0;color:var(--body)}
+.hero .cta{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-block;font-size:15px;padding:11px 22px;border-radius:980px;background:var(--ink);color:#fff}
+.btn.ghost{background:transparent;color:var(--purple);border:1px solid rgba(71,48,140,.35)}
+.btn:hover{text-decoration:none;opacity:.88}
+.load{opacity:0;transform:translateY(18px);animation:in 1s var(--ease) forwards}
+.load.d1{animation-delay:.1s}.load.d2{animation-delay:.25s}.load.d3{animation-delay:.4s}.load.d4{animation-delay:.55s}
+@keyframes in{to{opacity:1;transform:none}}
+
+/* scaling photo */
+.photo-track{height:190vh;position:relative}
+.photo-stick{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo-frame{position:relative;width:100%;height:100%;
+  transform:scale(var(--s,.62));border-radius:var(--r,28px);overflow:hidden;will-change:transform}
+.photo-frame img{width:100%;height:100%;object-fit:cover;object-position:35% 40%}
+.photo-cap{position:absolute;left:0;right:0;bottom:0;padding:48px 6vw;color:#fff;
+  background:linear-gradient(to top,rgba(8,9,13,.6),rgba(8,9,13,0));opacity:var(--c,0)}
+.photo-cap .n{font:600 clamp(34px,5vw,64px)/1 var(--display);letter-spacing:-.02em;margin:0 0 10px}
+.photo-cap .r{font-size:clamp(15px,1.6vw,19px);opacity:.9;margin:0}
+
+/* statement */
+.statement{padding:22vh 0 18vh}
+.statement p{font:600 clamp(30px,4.6vw,56px)/1.15 var(--display);letter-spacing:-.02em;margin:0;color:var(--ink)}
+.statement .word{opacity:.14;transition:opacity .35s linear}
+.statement .word.on{opacity:1}
+
+/* generic reveal */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
+section{scroll-margin-top:60px}
+.sec-h{font:600 clamp(38px,5.5vw,64px)/1.05 var(--display);letter-spacing:-.03em;color:var(--ink);margin:0 0 14px}
+.sec-sub{font-size:clamp(18px,2vw,21px);color:var(--muted);margin:0 0 48px;max-width:640px}
+
+/* about tiles */
+.about{padding:40px 0 140px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tile{background:var(--tint);border-radius:24px;padding:30px 28px 28px;min-height:220px;display:flex;flex-direction:column}
+.tile .k{font:600 12px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:auto}
+.tile h3{font:600 24px/1.15 var(--display);color:var(--ink);margin:28px 0 8px;letter-spacing:-.01em}
+.tile p{margin:0;font-size:15.5px}
+
+/* dark research band */
+.dark{background:#000;color:#A1A1A6;padding:140px 0 150px;overflow:hidden}
+.dark .sec-h{color:#F5F5F7}
+.dark .sec-sub{color:#A1A1A6}
+.cellwrap{width:min(520px,80vw);margin:0 auto 70px;transform:scale(var(--cs,.8));opacity:var(--co,.3);will-change:transform}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#141418;border-radius:24px;padding:30px 28px;border:1px solid #232329}
+.card .dot{width:10px;height:10px;border-radius:50%;background:var(--pink);margin-bottom:22px}
+.card:nth-child(2) .dot{background:#7B5FD6}
+.card.soon .dot{background:var(--lime)}
+.card h3{font:600 23px/1.2 var(--display);color:#F5F5F7;margin:0 0 10px}
+.card p{margin:0;font-size:15.5px;line-height:1.55}
+
+/* publications */
+.pubs{padding:150px 0 120px}
+.year{font:600 15px var(--display);color:var(--muted);letter-spacing:.04em;margin:46px 0 4px}
+.pub{display:grid;grid-template-columns:1fr auto;gap:6px 28px;padding:22px 0;border-top:1px solid var(--line)}
+.pub .t{font:600 20px/1.3 var(--display);color:var(--ink);margin:0;letter-spacing:-.005em}
+.pub .a{font-size:14.5px;margin:4px 0 0;color:var(--body)}
+.pub .a b{color:var(--ink)}
+.pub .links{display:flex;gap:16px;font-size:14.5px;margin-top:8px}
+.venue{align-self:start;font-size:12px;font-weight:600;color:var(--purple);background:#EFEBF8;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.venue.soon{color:#5E7212;background:#F1F6DF}
+
+/* code */
+.code{padding:20px 0 150px}
+.repos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.repo{border-radius:24px;padding:30px 28px;background:var(--tint);display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.repo:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(8,9,13,.08)}
+.repo h3{font:600 24px var(--display);color:var(--ink);margin:0 0 8px}
+.repo p{margin:0 0 22px;font-size:15.5px}
+.repo .links{margin-top:auto;display:flex;gap:16px;font-size:14.5px}
+
+/* footer */
+footer{background:var(--tint);padding:70px 0 40px;font-size:13px;color:var(--muted)}
+footer .big{font:600 clamp(30px,4vw,44px)/1.1 var(--display);color:var(--ink);letter-spacing:-.02em;margin:0 0 22px}
+footer .fl{display:flex;gap:22px;flex-wrap:wrap;font-size:15px;margin-bottom:48px}
+footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid #DDDBE3;padding-top:18px}
+
+@media (max-width:820px){
+  nav ul{gap:16px}
+  nav ul li.hide-s{display:none}
+  .eyebrow{font-size:11px;letter-spacing:.12em}
+  .tiles,.cards,.repos{grid-template-columns:1fr}
+  .pub{grid-template-columns:1fr}
+  .venue{justify-self:start}
+  .photo-track{height:150vh}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .load,.reveal{animation:none;opacity:1;transform:none;transition:none}
+  .statement .word{opacity:1}
+  .photo-frame{transform:none;border-radius:0}
+  .photo-cap{opacity:1}
+  .cellwrap{transform:none;opacity:1}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="w">
+    <a class="brand" href="#top">Reed Naidoo</a>
+    <ul>
+      <li class="hide-s"><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#code">Code</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <p class="eyebrow load">Computational biology · Generative AI</p>
+  <h1 class="load d1">Form follows<br /><span class="grad">function.</span></h1>
+  <p class="lede load d2">I'm Reed. I build generative models that learn how cells change shape, and what that shape tells us about how they work.</p>
+  <div class="cta load d3">
+    <a class="btn" href="#publications">See publications</a>
+    <a class="btn ghost" href="https://github.com/reednaidoo">GitHub</a>
+  </div>
+</header>
+
+<div class="photo-track" id="photoTrack">
+  <div class="photo-stick">
+    <div class="photo-frame" id="photoFrame">
+      <img src="assets/reed-wide.jpg" alt="Reed Naidoo on a rooftop overlooking London" />
+      <div class="photo-cap">
+        <p class="n">Reed Naidoo</p>
+        <p class="r">PhD Researcher, The Institute of Cancer Research · Research Scientist, Sentinal4D</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="statement">
+  <div class="w">
+    <p id="statement">Cell shape is a functional readout, not just a proxy. I build models that learn how 3D cell morphology responds to genetic and chemical perturbation, then use them to predict, simulate and interpret those responses.</p>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="w">
+    <h2 class="sec-h reveal">About</h2>
+    <p class="sec-sub reveal d1">Between an academic lab and a start-up, working on the same question from both sides.</p>
+    <div class="tiles">
+      <div class="tile reveal">
+        <span class="k">PhD</span>
+        <h3>The Institute of Cancer Research</h3>
+        <p>In <a href="https://www.icr.ac.uk/our-research/researchers-and-teams/professor-chris-bakal">Professor Chris Bakal's</a> Dynamical Cell Systems lab, funded by an NIHR BRC Studentship.</p>
+      </div>
+      <div class="tile reveal d1">
+        <span class="k">Industry</span>
+        <h3>Sentinal4D</h3>
+        <p>Research Scientist at an <a href="https://www.sentinal4d.com">ICR spin-out</a> building predictive models of living cells for drug discovery.</p>
+      </div>
+      <div class="tile reveal d2">
+        <span class="k">Background</span>
+        <h3>Statistics to cell biology</h3>
+        <p>Mathematical statistics in South Africa, then an MSc in Data Science at the University of Bath.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="research">
+  <div class="w">
+    <div class="cellwrap" id="cell"><img src="assets/cell-animated.svg" alt="" /></div>
+    <h2 class="sec-h reveal">Research</h2>
+    <p class="sec-sub reveal d1">Models that treat the cell's form as data worth predicting.</p>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="dot"></div>
+        <h3>Generative virtual cells</h3>
+        <p>Diffusion models that simulate how 3D cell morphology changes under perturbation, and what those changes reveal about mechanism.</p>
+      </div>
+      <div class="card reveal d1">
+        <div class="dot"></div>
+        <h3>Cross-modal translation</h3>
+        <p>Linking cell images to transcriptomics and other modalities, so imaging can stand in for costlier assays.</p>
+      </div>
+      <div class="card soon reveal d2">
+        <div class="dot"></div>
+        <h3>Coming soon</h3>
+        <p>New work to be announced.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pubs" id="publications">
+  <div class="w">
+    <h2 class="sec-h reveal">Publications</h2>
+    <p class="sec-sub reveal d1">Machine learning for cell morphology, from MICCAI to NeurIPS.</p>
+
+    <div class="year reveal">2026</div>
+    <div class="pub reveal">
+      <div><p class="t">Coming soon</p><p class="a"><b>R. Naidoo</b> et al.</p></div>
+      <span class="venue">NeurIPS 2026</span>
+    </div>
+    <div class="pub reveal">
+      <div><p class="t">Cell Painting Generates Single-Cell Transcriptomics via Conditional Diffusion</p>
+        <p class="a"><b>R. Naidoo</b>, J. Hu, G. Tripodi, C. Bakal, T. Chakraborti</p>
+        <div class="links"><a href="https://openreview.net/forum?id=ACHMa1e8J1">Paper</a><a href="https://github.com/reednaidoo/PhenoSeq">Code</a><a href="https://huggingface.co/Sentinal4D/PhenoSeq">Model</a></div></div>
+      <span class="venue">ICML 2026 Workshop</span>
+    </div>
+
+    <div class="year reveal">2025</div>
+    <div class="pub reveal">
+      <div><p class="t">Morphologically Intelligent Perturbation Prediction with FORM</p>
+        <p class="a"><b>R. Naidoo</b>, M. De Vries, O. Fourkioti, V. Bousgouni, M. Arias-Garcia, M. Portillo-Malumbres, C. Bakal</p>
+        <div class="links"><a href="https://arxiv.org/abs/2510.21337">Paper</a></div></div>
+      <span class="venue">arXiv</span>
+    </div>
+    <div class="pub reveal">
+      <div><p class="t">Interpretable Point Cloud Classification Using Multiple Instance Learning</p>
+        <p class="a">M. De Vries, <b>R. Naidoo</b>, O. Fourkioti, L. G. Dent, N. Curry, C. Dunsby, C. Bakal</p>
+        <div class="links"><a href="https://openaccess.thecvf.com/content/ICCV2025/html/De_Vries_Interpretable_point_cloud_classification_using_multiple_instance_learning_ICCV_2025_paper.html">Paper</a></div></div>
+      <span class="venue">ICCV 2025</span>
+    </div>
+    <div class="pub reveal">
+      <div><p class="t">Geometric Deep Learning and Multiple-Instance Learning for 3D Cell-Shape Profiling</p>
+        <p class="a">M. De Vries, L. G. Dent, N. Curry, L. Rowe-Brown, V. Bousgouni, O. Fourkioti, <b>R. Naidoo</b>, H. Sparks, A. Tyson, C. Dunsby, C. Bakal</p>
+        <div class="links"><a href="https://repository.icr.ac.uk/items/376ed8e5-66c7-4a4a-8255-8bc8ae187b46">Paper</a></div></div>
+      <span class="venue">Cell Systems</span>
+    </div>
+
+    <div class="year reveal">2024</div>
+    <div class="pub reveal">
+      <div><p class="t">SurvivMIL: A Multimodal, Multiple Instance Learning Pipeline for Survival Outcome of Neuroblastoma Patients</p>
+        <p class="a"><b>R. Naidoo</b>, O. Fourkioti, M. De Vries, C. Bakal</p>
+        <div class="links"><a href="https://proceedings.mlr.press/v254/naidoo24a.html">Paper</a><a href="https://github.com/reednaidoo/SurvivMIL_COMPAYL">Code</a></div></div>
+      <span class="venue">MICCAI 2024 Workshop</span>
+    </div>
+    <div class="pub reveal">
+      <div><p class="t">Interpretable Phenotypic Profiling of 3D Cellular Morphodynamics</p>
+        <p class="a">M. De Vries, <b>R. Naidoo</b>, O. Fourkioti, L. G. Dent, N. Curry, C. Dunsby, C. Bakal</p>
+        <div class="links"><a href="https://papers.miccai.org/miccai-2024/418-Paper3839.html">Paper</a><a href="https://doi.org/10.1007/978-3-031-72117-5_45">DOI</a></div></div>
+      <span class="venue">MICCAI 2024</span>
+    </div>
+  </div>
+</section>
+
+<section class="code" id="code">
+  <div class="w">
+    <h2 class="sec-h reveal">Code and models</h2>
+    <p class="sec-sub reveal d1">Open-source releases.</p>
+    <div class="repos">
+      <div class="repo reveal">
+        <h3>PhenoSeq</h3>
+        <p>Conditional diffusion model that generates single-cell transcriptomic embeddings from Cell Painting features.</p>
+        <div class="links"><a href="https://github.com/reednaidoo/PhenoSeq">GitHub</a><a href="https://huggingface.co/Sentinal4D/PhenoSeq">Hugging Face</a></div>
+      </div>
+      <div class="repo reveal d1">
+        <h3>SurvivMIL</h3>
+        <p>Multimodal multiple instance learning for survival prediction in neuroblastoma.</p>
+        <div class="links"><a href="https://github.com/reednaidoo/SurvivMIL_COMPAYL">GitHub</a></div>
+      </div>
+      <div class="repo reveal d2">
+        <h3>NOVA</h3>
+        <p>Vector-quantised transformer for microscopy with biological graph priors.</p>
+        <div class="links"><span class="venue soon">Coming soon</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <p class="big">Let's work together.</p>
+    <div class="fl">
+      <a href="https://www.linkedin.com/in/reed-naidoo-02329a223/">LinkedIn</a>
+      <a href="https://github.com/reednaidoo">GitHub</a>
+      <a href="https://orcid.org/0009-0004-7519-197X">ORCID</a>
+      <a href="https://huggingface.co/Sentinal4D">Hugging Face</a>
+      <a href="https://www.sentinal4d.com">Sentinal4D</a>
+    </div>
+    <div class="base"><span>London, UK</span><span>© 2026 Reed Naidoo</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // split statement into words
+  var st = document.getElementById('statement');
+  st.innerHTML = st.textContent.trim().split(/\s+/).map(function(w){ return '<span class="word">'+w+'</span>'; }).join(' ');
+  var words = st.querySelectorAll('.word');
+
+  if (reduce) return;
+  var track = document.getElementById('photoTrack'), frame = document.getElementById('photoFrame'), cell = document.getElementById('cell');
+  var clamp = function(v){ return Math.max(0, Math.min(1, v)); };
+  var ticking = false;
+
+  function update(){
+    ticking = false;
+    var vh = window.innerHeight;
+
+    // photo: grows from inset card to full bleed
+    var r = track.getBoundingClientRect();
+    var p = clamp(-r.top / (r.height - vh));
+    var e = 1 - Math.pow(1 - clamp(p / .7), 3);
+    frame.style.setProperty('--s', (.62 + .38 * e).toFixed(4));
+    frame.style.setProperty('--r', (28 * (1 - e)).toFixed(1) + 'px');
+    frame.style.setProperty('--c', clamp((p - .6) / .3).toFixed(3));
+
+    // statement: light words up as it crosses the screen
+    var sr = st.getBoundingClientRect();
+    var sp = clamp((vh * .85 - sr.top) / (sr.height + vh * .35));
+    var n = Math.round(sp * words.length);
+    for (var i = 0; i < words.length; i++) words[i].classList.toggle('on', i < n);
+
+    // cell: scales up as research band enters
+    var cr = cell.getBoundingClientRect();
+    var cp = clamp((vh - cr.top) / (vh * .9));
+    cell.style.setProperty('--cs', (.75 + .25 * cp).toFixed(3));
+    cell.style.setProperty('--co', (.25 + .75 * cp).toFixed(3));
+  }
+  window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive:true});
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
+</body>
+</html>
