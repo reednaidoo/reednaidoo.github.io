@@ -6,7 +6,7 @@
 <title>Reed Naidoo</title>
 <meta name="description" content="Reed Naidoo. PhD researcher at The Institute of Cancer Research and Research Scientist at Sentinal4D, building generative models of 3D cell morphology." />
 <meta property="og:title" content="Reed Naidoo" />
-<meta property="og:description" content="Generative models for 3D cell morphology and perturbation." />
+<meta property="og:description" content="The virtual cell, through the lens of live, 3D morphology." />
 <meta property="og:image" content="https://reednaidoo.github.io/assets/og.jpg" />
 <meta name="theme-color" content="#ffffff" />
 <link rel="icon" href="assets/cell.svg" type="image/svg+xml" />
@@ -87,7 +87,7 @@ section{scroll-margin-top:60px}
 
 /* about tiles */
 .about{padding:40px 0 140px}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 .tile{background:var(--tint);border-radius:24px;padding:30px 28px 28px;min-height:220px;display:flex;flex-direction:column}
 .tile .k{font:600 12px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:auto}
 .tile h3{font:600 24px/1.15 var(--display);color:var(--ink);margin:28px 0 8px;letter-spacing:-.01em}
@@ -173,8 +173,8 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
 
 <header class="hero" id="top">
   <p class="eyebrow load">Computational biology · Generative AI</p>
-  <h1 class="load d1">Form follows<br /><span class="grad">function.</span></h1>
-  <p class="lede load d2">I'm Reed. I build generative models that learn how cells change shape, and what that shape tells us about how they work.</p>
+  <h1 class="load d1"><span class="grad">Hey!</span></h1>
+  <p class="lede load d2">I'm Reed, a PhD researcher at The Institute of Cancer Research and a Research Scientist at Sentinal4D in London.</p>
   <div class="cta load d3">
     <a class="btn" href="mailto:reed.naidoo@sentinal4d.com?subject=Hello%20Reed">Get in touch</a>
     <a class="btn ghost" href="#publications">See publications</a>
@@ -195,7 +195,7 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
 
 <section class="statement">
   <div class="w">
-    <p id="statement">Cell shape is a functional readout, not just a proxy. I build models that learn how 3D cell morphology responds to genetic and chemical perturbation, then use them to predict, simulate and interpret those responses.</p>
+    <p id="statement">I'm working on the virtual cell, through the lens of live, 3D morphology. Cell shape is a functional readout, not just a proxy, and I build models that learn how it responds to genetic and chemical perturbation.</p>
   </div>
 </section>
 
@@ -213,11 +213,6 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
         <span class="k">Industry</span>
         <h3>Sentinal4D</h3>
         <p>Research Scientist at an <a href="https://www.sentinal4d.com">ICR spin-out</a> building predictive models of living cells for drug discovery.</p>
-      </div>
-      <div class="tile reveal d2">
-        <span class="k">Background</span>
-        <h3>Statistics to cell biology</h3>
-        <p>Mathematical statistics in South Africa, then an MSc in Data Science at the University of Bath.</p>
       </div>
     </div>
   </div>
@@ -307,19 +302,19 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
     <p class="sec-sub reveal d1">Open-source releases.</p>
     <div class="repos">
       <div class="repo reveal">
+        <h3>NOVA</h3>
+        <p>More information coming soon.</p>
+        <div class="links"><span class="venue soon">Coming soon</span></div>
+      </div>
+      <div class="repo reveal d1">
         <h3>PhenoSeq</h3>
         <p>Conditional diffusion model that generates single-cell transcriptomic embeddings from Cell Painting features.</p>
         <div class="links"><a href="https://github.com/reednaidoo/PhenoSeq">GitHub</a><a href="https://huggingface.co/Sentinal4D/PhenoSeq">Hugging Face</a></div>
       </div>
-      <div class="repo reveal d1">
+      <div class="repo reveal d2">
         <h3>SurvivMIL</h3>
         <p>Multimodal multiple instance learning for survival prediction in neuroblastoma.</p>
         <div class="links"><a href="https://github.com/reednaidoo/SurvivMIL_COMPAYL">GitHub</a></div>
-      </div>
-      <div class="repo reveal d2">
-        <h3>NOVA</h3>
-        <p>Vector-quantised transformer for microscopy with biological graph priors.</p>
-        <div class="links"><span class="venue soon">Coming soon</span></div>
       </div>
     </div>
   </div>
