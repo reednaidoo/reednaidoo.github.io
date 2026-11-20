@@ -40,6 +40,10 @@ nav .brand:hover{text-decoration:none}
 nav ul{list-style:none;display:flex;gap:26px;margin:0;padding:0;font-size:13px}
 nav ul a{color:var(--body);opacity:.85}
 nav ul a:hover{opacity:1;text-decoration:none;color:var(--ink)}
+nav ul{align-items:center}
+nav ul a,nav .brand{white-space:nowrap}
+nav ul a.pill{opacity:1;color:#fff;background:var(--purple);padding:6px 14px;border-radius:980px;font-weight:500}
+nav ul a.pill:hover{color:#fff;background:#3a2673}
 
 /* hero */
 .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 24px 40px}
@@ -56,14 +60,14 @@ nav ul a:hover{opacity:1;text-decoration:none;color:var(--ink)}
 @keyframes in{to{opacity:1;transform:none}}
 
 /* scaling photo */
-.photo-track{height:190vh;position:relative}
+.photo-track{height:150vh;position:relative}
 .photo-stick{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.photo-frame{position:relative;width:100%;height:100%;
-  transform:scale(var(--s,.62));border-radius:var(--r,28px);overflow:hidden;will-change:transform}
+.photo-frame{position:relative;width:min(1040px,88vw);height:min(66vh,620px);
+  transform:scale(var(--s,.8));border-radius:var(--r,32px);overflow:hidden;will-change:transform;box-shadow:0 30px 80px rgba(8,9,13,.12)}
 .photo-frame img{width:100%;height:100%;object-fit:cover;object-position:35% 40%}
-.photo-cap{position:absolute;left:0;right:0;bottom:0;padding:48px 6vw;color:#fff;
+.photo-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 44px;color:#fff;
   background:linear-gradient(to top,rgba(8,9,13,.6),rgba(8,9,13,0));opacity:var(--c,0)}
-.photo-cap .n{font:600 clamp(34px,5vw,64px)/1 var(--display);letter-spacing:-.02em;margin:0 0 10px}
+.photo-cap .n{font:600 clamp(30px,4vw,48px)/1 var(--display);letter-spacing:-.02em;margin:0 0 10px}
 .photo-cap .r{font-size:clamp(15px,1.6vw,19px);opacity:.9;margin:0}
 
 /* statement */
@@ -123,8 +127,11 @@ section{scroll-margin-top:60px}
 .repo .links{margin-top:auto;display:flex;gap:16px;font-size:14.5px}
 
 /* footer */
-footer{background:var(--tint);padding:70px 0 40px;font-size:13px;color:var(--muted)}
+footer{background:var(--tint);padding:100px 0 40px;font-size:13px;color:var(--muted)}
 footer .big{font:600 clamp(30px,4vw,44px)/1.1 var(--display);color:var(--ink);letter-spacing:-.02em;margin:0 0 22px}
+footer .fsub{font-size:17px;color:var(--body);margin:-8px 0 26px;max-width:520px}
+footer .btn.mail{background:var(--purple);font-size:16px;padding:13px 28px}
+footer .addr{margin:12px 0 44px;font-size:14px;color:var(--muted)}
 footer .fl{display:flex;gap:22px;flex-wrap:wrap;font-size:15px;margin-bottom:48px}
 footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid #DDDBE3;padding-top:18px}
 
@@ -135,13 +142,15 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
   .tiles,.cards,.repos{grid-template-columns:1fr}
   .pub{grid-template-columns:1fr}
   .venue{justify-self:start}
-  .photo-track{height:150vh}
+  .photo-track{height:130vh}
+  .photo-frame{height:min(62vh,560px)}
+  .photo-cap{padding:28px 24px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .load,.reveal{animation:none;opacity:1;transform:none;transition:none}
   .statement .word{opacity:1}
-  .photo-frame{transform:none;border-radius:0}
+  .photo-frame{transform:none;border-radius:20px}
   .photo-cap{opacity:1}
   .cellwrap{transform:none;opacity:1}
 }
@@ -154,9 +163,10 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
     <a class="brand" href="#top">Reed Naidoo</a>
     <ul>
       <li class="hide-s"><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
+      <li class="hide-s"><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
-      <li><a href="#code">Code</a></li>
+      <li class="hide-s"><a href="#code">Code</a></li>
+      <li><a class="pill" href="mailto:reed.naidoo@sentinal4d.com?subject=Hello%20Reed">Get in touch</a></li>
     </ul>
   </div>
 </nav>
@@ -166,15 +176,15 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
   <h1 class="load d1">Form follows<br /><span class="grad">function.</span></h1>
   <p class="lede load d2">I'm Reed. I build generative models that learn how cells change shape, and what that shape tells us about how they work.</p>
   <div class="cta load d3">
-    <a class="btn" href="#publications">See publications</a>
-    <a class="btn ghost" href="https://github.com/reednaidoo">GitHub</a>
+    <a class="btn" href="mailto:reed.naidoo@sentinal4d.com?subject=Hello%20Reed">Get in touch</a>
+    <a class="btn ghost" href="#publications">See publications</a>
   </div>
 </header>
 
 <div class="photo-track" id="photoTrack">
   <div class="photo-stick">
     <div class="photo-frame" id="photoFrame">
-      <img src="assets/reed-wide.jpg" alt="Reed Naidoo on a rooftop overlooking London" />
+      <img src="assets/reed-bw.jpg" alt="Reed Naidoo on a rooftop overlooking London" />
       <div class="photo-cap">
         <p class="n">Reed Naidoo</p>
         <p class="r">PhD Researcher, The Institute of Cancer Research · Research Scientist, Sentinal4D</p>
@@ -318,6 +328,9 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
 <footer>
   <div class="w">
     <p class="big">Let's work together.</p>
+    <p class="fsub">Collaborations, talks or questions about the work. I'd love to hear from you.</p>
+    <a class="btn mail" href="mailto:reed.naidoo@sentinal4d.com?subject=Hello%20Reed">Email me</a>
+    <p class="addr">reed.naidoo@sentinal4d.com</p>
     <div class="fl">
       <a href="https://www.linkedin.com/in/reed-naidoo-02329a223/">LinkedIn</a>
       <a href="https://github.com/reednaidoo">GitHub</a>
@@ -357,8 +370,8 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
     var r = track.getBoundingClientRect();
     var p = clamp(-r.top / (r.height - vh));
     var e = 1 - Math.pow(1 - clamp(p / .7), 3);
-    frame.style.setProperty('--s', (.62 + .38 * e).toFixed(4));
-    frame.style.setProperty('--r', (28 * (1 - e)).toFixed(1) + 'px');
+    frame.style.setProperty('--s', (.8 + .2 * e).toFixed(4));
+    frame.style.setProperty('--r', (32 - 12 * e).toFixed(1) + 'px');
     frame.style.setProperty('--c', clamp((p - .6) / .3).toFixed(3));
 
     // statement: light words up as it crosses the screen
