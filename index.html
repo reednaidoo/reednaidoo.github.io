@@ -120,11 +120,27 @@ section{scroll-margin-top:60px}
 /* code */
 .code{padding:20px 0 150px}
 .repos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.repo{border-radius:24px;padding:30px 28px;background:var(--tint);display:flex;flex-direction:column;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
-.repo:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(8,9,13,.08)}
+.repo{border-radius:24px;padding:30px 28px;background:var(--tint);display:flex;flex-direction:column}
 .repo h3{font:600 24px var(--display);color:var(--ink);margin:0 0 8px}
 .repo p{margin:0 0 22px;font-size:15.5px}
 .repo .links{margin-top:auto;display:flex;gap:16px;font-size:14.5px}
+
+.link{position:relative;cursor:pointer}
+.link .stretch{color:inherit;text-decoration:none}
+.link .stretch::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:1}
+.link a:not(.stretch){position:relative;z-index:2}
+.arr{display:inline-block;margin-left:.3em;font-size:.8em;opacity:0;transform:translate(-4px,4px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.link:hover .arr{opacity:1;transform:none}
+.tile.link,.repo.link{transition:background-color .35s var(--ease),box-shadow .35s var(--ease),opacity 1s var(--ease),transform 1s var(--ease)}
+.tile.link:hover,.repo.link:hover{background:#EFEBF8;box-shadow:0 18px 40px rgba(71,48,140,.12)}
+.tile.link:hover h3,.repo.link:hover h3{color:var(--purple)}
+.card.link{transition:border-color .35s var(--ease),background-color .35s var(--ease),opacity 1s var(--ease),transform 1s var(--ease)}
+.card.link:hover{background:#1B1A22;border-color:#4A3A86}
+.pub.link{margin:0 -18px;padding:22px 18px;border-radius:16px;transition:background-color .3s var(--ease),opacity 1s var(--ease),transform 1s var(--ease)}
+.pub.link:hover{background:var(--tint)}
+.pub.link:hover .t{color:var(--purple)}
+.pub.link + .pub, .pub + .pub.link{border-top-color:var(--line)}
+.repo:hover{transform:none}
 
 /* footer */
 footer{background:var(--tint);padding:100px 0 40px;font-size:13px;color:var(--muted)}
@@ -204,14 +220,14 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
     <h2 class="sec-h reveal">About</h2>
     <p class="sec-sub reveal d1">Between an academic lab and a start-up, working on the same question from both sides.</p>
     <div class="tiles">
-      <div class="tile reveal">
+      <div class="tile link reveal">
         <span class="k">PhD</span>
-        <h3>The Institute of Cancer Research</h3>
+        <h3><a class="stretch" href="https://www.icr.ac.uk/">The Institute of Cancer Research<span class="arr" aria-hidden="true">↗</span></a></h3>
         <p>In <a href="https://www.icr.ac.uk/our-research/researchers-and-teams/professor-chris-bakal">Professor Chris Bakal's</a> Dynamical Cell Systems lab, funded by an NIHR BRC Studentship.</p>
       </div>
-      <div class="tile reveal d1">
+      <div class="tile link reveal d1">
         <span class="k">Industry</span>
-        <h3>Sentinal4D</h3>
+        <h3><a class="stretch" href="https://www.sentinal4d.com">Sentinal4D<span class="arr" aria-hidden="true">↗</span></a></h3>
         <p>Research Scientist at an <a href="https://www.sentinal4d.com">ICR spin-out</a> building predictive models of living cells for drug discovery.</p>
       </div>
     </div>
@@ -224,14 +240,14 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
     <h2 class="sec-h reveal">Research</h2>
     <p class="sec-sub reveal d1">Models that treat the cell's form as data worth predicting.</p>
     <div class="cards">
-      <div class="card reveal">
+      <div class="card link reveal">
         <div class="dot"></div>
-        <h3>Generative virtual cells</h3>
+        <h3><a class="stretch" href="https://arxiv.org/abs/2510.21337">Generative virtual cells<span class="arr" aria-hidden="true">↗</span></a></h3>
         <p>Diffusion models that simulate how 3D cell morphology changes under perturbation, and what those changes reveal about mechanism.</p>
       </div>
-      <div class="card reveal d1">
+      <div class="card link reveal d1">
         <div class="dot"></div>
-        <h3>Cross-modal translation</h3>
+        <h3><a class="stretch" href="https://openreview.net/forum?id=ACHMa1e8J1">Cross-modal translation<span class="arr" aria-hidden="true">↗</span></a></h3>
         <p>Linking cell images to transcriptomics and other modalities, so imaging can stand in for costlier assays.</p>
       </div>
       <div class="card soon reveal d2">
@@ -253,42 +269,42 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
       <div><p class="t">Coming soon</p><p class="a"><b>R. Naidoo</b> et al.</p></div>
       <span class="venue">NeurIPS 2026</span>
     </div>
-    <div class="pub reveal">
-      <div><p class="t">Cell Painting Generates Single-Cell Transcriptomics via Conditional Diffusion</p>
+    <div class="pub link reveal">
+      <div><p class="t"><a class="stretch" href="https://openreview.net/forum?id=ACHMa1e8J1">Cell Painting Generates Single-Cell Transcriptomics via Conditional Diffusion<span class="arr" aria-hidden="true">↗</span></a></p>
         <p class="a"><b>R. Naidoo</b>, J. Hu, G. Tripodi, C. Bakal, T. Chakraborti</p>
         <div class="links"><a href="https://openreview.net/forum?id=ACHMa1e8J1">Paper</a><a href="https://github.com/reednaidoo/PhenoSeq">Code</a><a href="https://huggingface.co/Sentinal4D/PhenoSeq">Model</a></div></div>
       <span class="venue">ICML 2026 Workshop</span>
     </div>
 
     <div class="year reveal">2025</div>
-    <div class="pub reveal">
-      <div><p class="t">Morphologically Intelligent Perturbation Prediction with FORM</p>
+    <div class="pub link reveal">
+      <div><p class="t"><a class="stretch" href="https://arxiv.org/abs/2510.21337">Morphologically Intelligent Perturbation Prediction with FORM<span class="arr" aria-hidden="true">↗</span></a></p>
         <p class="a"><b>R. Naidoo</b>, M. De Vries, O. Fourkioti, V. Bousgouni, M. Arias-Garcia, M. Portillo-Malumbres, C. Bakal</p>
         <div class="links"><a href="https://arxiv.org/abs/2510.21337">Paper</a></div></div>
       <span class="venue">arXiv</span>
     </div>
-    <div class="pub reveal">
-      <div><p class="t">Interpretable Point Cloud Classification Using Multiple Instance Learning</p>
+    <div class="pub link reveal">
+      <div><p class="t"><a class="stretch" href="https://openaccess.thecvf.com/content/ICCV2025/html/De_Vries_Interpretable_point_cloud_classification_using_multiple_instance_learning_ICCV_2025_paper.html">Interpretable Point Cloud Classification Using Multiple Instance Learning<span class="arr" aria-hidden="true">↗</span></a></p>
         <p class="a">M. De Vries, <b>R. Naidoo</b>, O. Fourkioti, L. G. Dent, N. Curry, C. Dunsby, C. Bakal</p>
         <div class="links"><a href="https://openaccess.thecvf.com/content/ICCV2025/html/De_Vries_Interpretable_point_cloud_classification_using_multiple_instance_learning_ICCV_2025_paper.html">Paper</a></div></div>
       <span class="venue">ICCV 2025</span>
     </div>
-    <div class="pub reveal">
-      <div><p class="t">Geometric Deep Learning and Multiple-Instance Learning for 3D Cell-Shape Profiling</p>
+    <div class="pub link reveal">
+      <div><p class="t"><a class="stretch" href="https://repository.icr.ac.uk/items/376ed8e5-66c7-4a4a-8255-8bc8ae187b46">Geometric Deep Learning and Multiple-Instance Learning for 3D Cell-Shape Profiling<span class="arr" aria-hidden="true">↗</span></a></p>
         <p class="a">M. De Vries, L. G. Dent, N. Curry, L. Rowe-Brown, V. Bousgouni, O. Fourkioti, <b>R. Naidoo</b>, H. Sparks, A. Tyson, C. Dunsby, C. Bakal</p>
         <div class="links"><a href="https://repository.icr.ac.uk/items/376ed8e5-66c7-4a4a-8255-8bc8ae187b46">Paper</a></div></div>
       <span class="venue">Cell Systems</span>
     </div>
 
     <div class="year reveal">2024</div>
-    <div class="pub reveal">
-      <div><p class="t">SurvivMIL: A Multimodal, Multiple Instance Learning Pipeline for Survival Outcome of Neuroblastoma Patients</p>
+    <div class="pub link reveal">
+      <div><p class="t"><a class="stretch" href="https://proceedings.mlr.press/v254/naidoo24a.html">SurvivMIL: A Multimodal, Multiple Instance Learning Pipeline for Survival Outcome of Neuroblastoma Patients<span class="arr" aria-hidden="true">↗</span></a></p>
         <p class="a"><b>R. Naidoo</b>, O. Fourkioti, M. De Vries, C. Bakal</p>
         <div class="links"><a href="https://proceedings.mlr.press/v254/naidoo24a.html">Paper</a><a href="https://github.com/reednaidoo/SurvivMIL_COMPAYL">Code</a></div></div>
       <span class="venue">MICCAI 2024 Workshop</span>
     </div>
-    <div class="pub reveal">
-      <div><p class="t">Interpretable Phenotypic Profiling of 3D Cellular Morphodynamics</p>
+    <div class="pub link reveal">
+      <div><p class="t"><a class="stretch" href="https://papers.miccai.org/miccai-2024/418-Paper3839.html">Interpretable Phenotypic Profiling of 3D Cellular Morphodynamics<span class="arr" aria-hidden="true">↗</span></a></p>
         <p class="a">M. De Vries, <b>R. Naidoo</b>, O. Fourkioti, L. G. Dent, N. Curry, C. Dunsby, C. Bakal</p>
         <div class="links"><a href="https://papers.miccai.org/miccai-2024/418-Paper3839.html">Paper</a><a href="https://doi.org/10.1007/978-3-031-72117-5_45">DOI</a></div></div>
       <span class="venue">MICCAI 2024</span>
@@ -306,13 +322,13 @@ footer .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;b
         <p>More information coming soon.</p>
         <div class="links"><span class="venue soon">Coming soon</span></div>
       </div>
-      <div class="repo reveal d1">
-        <h3>PhenoSeq</h3>
+      <div class="repo link reveal d1">
+        <h3><a class="stretch" href="https://github.com/reednaidoo/PhenoSeq">PhenoSeq<span class="arr" aria-hidden="true">↗</span></a></h3>
         <p>Conditional diffusion model that generates single-cell transcriptomic embeddings from Cell Painting features.</p>
         <div class="links"><a href="https://github.com/reednaidoo/PhenoSeq">GitHub</a><a href="https://huggingface.co/Sentinal4D/PhenoSeq">Hugging Face</a></div>
       </div>
-      <div class="repo reveal d2">
-        <h3>SurvivMIL</h3>
+      <div class="repo link reveal d2">
+        <h3><a class="stretch" href="https://github.com/reednaidoo/SurvivMIL_COMPAYL">SurvivMIL<span class="arr" aria-hidden="true">↗</span></a></h3>
         <p>Multimodal multiple instance learning for survival prediction in neuroblastoma.</p>
         <div class="links"><a href="https://github.com/reednaidoo/SurvivMIL_COMPAYL">GitHub</a></div>
       </div>
